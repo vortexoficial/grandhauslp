@@ -1,0 +1,742 @@
+/* ------------------------------------------
+ROOT VARIABLES (Baseado na Identidade Visual)
+------------------------------------------
+*/
+:root {
+    --color-terra: #28201B;
+    --color-secundaria: #19130E;
+    --color-cimento: #726760;
+    --color-gesso: #E2E2E2;
+    --color-piche: #050301;
+    
+    --font-primary: 'IBM Plex Serif', serif;
+    --font-secondary: 'Inter', sans-serif;
+
+    --transition-smooth: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ------------------------------------------
+RESET E GLOBAIS
+------------------------------------------
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base para REM */
+}
+
+body {
+    font-family: var(--font-secondary);
+    background-color: var(--color-gesso);
+    color: var(--color-piche);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-primary);
+    font-weight: 500;
+}
+
+p {
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 90%;
+}
+
+section {
+    padding: 7rem 0;
+    overflow: hidden;
+}
+
+/* ------------------------------------------
+Animação de Brilho Sutil (Loop) - Para Seção Diferencial
+------------------------------------------
+*/
+@keyframes subtle-glow {
+    0% { 
+        box-shadow: 0 0 0 0px rgba(114, 103, 96, 0.1); 
+        border-color: rgba(0,0,0,0.05);
+    }
+    50% { 
+        box-shadow: 0 0 10px 3px rgba(114, 103, 96, 0.15); 
+        border-color: rgba(0,0,0,0.1);
+    }
+    100% { 
+        box-shadow: 0 0 0 0px rgba(114, 103, 96, 0.1);
+        border-color: rgba(0,0,0,0.05);
+    }
+}
+
+
+/* ------------------------------------------
+LOADER 
+------------------------------------------
+*/
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-gesso);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    transition: opacity 0.8s ease, visibility 0.8s ease; 
+}
+
+#loader .loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem; 
+}
+
+#loader .loader-logo-img {
+    height: 60px; 
+    width: auto;
+    filter: none; 
+}
+
+.loader-bar-container {
+    width: 200px;
+    height: 4px;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 0.5rem; 
+}
+.loader-bar {
+    width: 0%; 
+    height: 100%;
+    background-color: var(--color-piche);
+    border-radius: 2px;
+    transition: width 0.3s ease-out; 
+}
+
+#loader.loading-animation .loader-bar {
+    width: 100%; 
+    transition: width 2s ease-out; 
+}
+
+#loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* ------------------------------------------
+HEADER (Menu) 
+------------------------------------------
+*/
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 0;
+    z-index: 100;
+    transition: var(--transition-smooth); 
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    display: block; 
+    text-decoration: none;
+    line-height: 0; 
+}
+
+header .logo .logo-img {
+    height: 50px; 
+    width: auto;
+}
+
+header .logo .logo-img-default {
+    filter: brightness(0) invert(1); 
+}
+
+header.scrolled {
+    background-color: rgba(226, 226, 226, 0.85); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+header.scrolled .logo .logo-img-default {
+    filter: none !important; 
+}
+
+.header-cta {
+    display: inline-block;
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    font-size: 0.9rem; 
+    text-decoration: none;
+    color: var(--color-gesso); 
+    background-color: var(--color-terra); 
+    padding: 0.7rem 1.5rem; 
+    border-radius: 5px;
+    transition: var(--transition-smooth);
+    border: 1px solid var(--color-terra);
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+}
+
+.header-cta:hover {
+    background-color: var(--color-cimento);
+    border-color: var(--color-cimento);
+    color: var(--color-gesso);
+    transform: translateY(0); 
+}
+
+header.scrolled .header-cta {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    color: var(--color-piche); 
+    background-color: transparent; 
+    border-color: var(--color-piche); 
+}
+
+header.scrolled .header-cta:hover {
+    background-color: var(--color-piche);
+    border-color: var(--color-piche);
+    color: var(--color-gesso); 
+}
+
+
+/* ------------------------------------------
+BOTÃO CTA (Principal da Página)
+------------------------------------------
+*/
+.cta-button {
+    display: inline-block; 
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    background-color: var(--color-gesso); 
+    color: var(--color-piche); 
+    padding: 1.25rem 1.75rem; 
+    border-radius: 5px;
+    transition: var(--transition-smooth);
+    border: 2px solid transparent;
+    cursor: pointer;
+    box-shadow: 0 0 0 0 rgba(226, 226, 226, 0.4);
+    
+    /* Prepara para o efeito de luz */
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+@keyframes pulse-cta { 
+    0% { box-shadow: 0 0 0 0 rgba(226, 226, 226, 0.5); }
+    70% { box-shadow: 0 0 0 15px rgba(226, 226, 226, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(226, 226, 226, 0); }
+}
+
+/* Hover padrão para outros botões */
+.cta-button:hover {
+    transform: translateY(-3px);
+    background-color: var(--color-cimento);
+    color: var(--color-gesso);
+    animation: none; 
+}
+
+/* ... (Restante do CSS Principal continua igual) ... */
+
+/* ------------------------------------------
+ANIMAÇÕES DE SCROLL (Fade In Up)
+------------------------------------------
+*/
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+    transition-delay: 0.2s;
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.animate-on-scroll.delay-1 { transition-delay: 0.4s; }
+.animate-on-scroll.delay-2 { transition-delay: 0.6s; }
+.animate-on-scroll.delay-3 { transition-delay: 0.8s; }
+
+/* ------------------------------------------
+1. SEÇÃO HERO
+------------------------------------------
+*/
+#hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center; 
+    color: var(--color-gesso);
+    padding-top: 8rem;
+    position: relative;
+    overflow: hidden;
+    
+    background-image: 
+        linear-gradient(to right, 
+            rgba(25, 19, 14, 0.95) 0%, 
+            rgba(25, 19, 14, 0.85) 40%, 
+            rgba(25, 19, 14, 0.5) 70%,
+            transparent 100%), 
+        url('img/bg.png'); 
+    
+    background-size: cover; 
+    background-position: right center; 
+    background-repeat: no-repeat;
+    background-color: var(--color-secundaria); 
+}
+#hero .container {
+    text-align: left; 
+}
+#hero .hero-content {
+    max-width: 550px; 
+}
+#hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem); 
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--color-gesso);
+}
+#hero p {
+    font-size: 1.25rem;
+    color: #bfbfbf; 
+    max-width: 600px; 
+    margin-bottom: 2.5rem;
+}
+
+#hero .cta-button {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 0.8rem; 
+    line-height: 1.4; 
+    
+    background-color: var(--color-gesso); 
+    color: var(--color-piche); 
+}
+
+#hero .cta-button i {
+    font-size: 1.5rem; 
+    flex-shrink: 0; 
+    z-index: 2; 
+}
+
+/* ANIMAÇÃO DE SHINE (BRILHO) */
+@keyframes shine {
+    0% { transform: translateX(-100%); }
+    60% { transform: translateX(100%); }
+    100% { transform: translateX(100%); }
+}
+
+#hero .cta-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%; 
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.6) 50%, 
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: translateX(-100%); 
+    transition: transform 0.6s ease, background 0.4s ease, opacity 0.4s ease; /* Adicionada transição */
+    animation: shine 4s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    animation-delay: 2s; 
+    z-index: 0; 
+}
+
+/* Efeito HOVER do botão HERO */
+#hero .cta-button:hover {
+    transform: translateY(-3px);
+    background-color: var(--color-cimento); /* Cor de fundo no hover */
+    color: var(--color-gesso); /* Cor do texto no hover */
+    /* NOVO: Adiciona o brilho externo sutil */
+    box-shadow: 0 0 25px 8px rgba(255, 255, 255, 0.1); 
+}
+
+/* Efeito da LUZ INTERNA no HOVER */
+#hero .cta-button:hover::after {
+    animation: none; /* Para a animação contínua */
+    left: 0;
+    width: 100%;
+    transform: none; /* Reseta a posição */
+    background: rgba(255, 255, 255, 0.15); /* Sobreposição de luz sutil */
+    opacity: 1; /* Garante visibilidade */
+}
+
+#hero .cta-button span {
+    position: relative;
+    z-index: 2;
+}
+
+/* ------------------------------------------
+2. SEÇÃO SOBRE ... (e demais seções) ...
+------------------------------------------
+*/
+/* ... (As seções 2 a 6 e o footer continuam iguais) ... */
+#sobre {
+    background-color: var(--color-gesso);
+    color: var(--color-piche);
+}
+#sobre .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+#sobre h2 {
+    font-size: 2.5rem;
+    color: var(--color-terra);
+    margin-bottom: 1.5rem;
+}
+#sobre p {
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin-bottom: 1.5rem;
+    color: var(--color-secundaria);
+}
+#sobre p em {
+    font-family: var(--font-primary);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--color-terra);
+}
+#solucoes {
+    background-color: var(--color-terra);
+    color: var(--color-gesso);
+}
+#solucoes .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: flex-start;
+}
+#solucoes h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+#solucoes .intro-text {
+    font-size: 1.1rem;
+    color: var(--color-cimento);
+    max-width: 500px;
+    margin-bottom: 2.5rem;
+}
+#solucoes ul {
+    list-style: none;
+    margin-top: 1rem;
+}
+#solucoes ul li {
+    font-size: 1.15rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    color: var(--color-gesso);
+}
+#solucoes ul li i {
+    font-size: 1.5rem;
+    color: var(--color-cimento);
+    margin-right: 1rem;
+}
+#solucoes .cta-button {
+    margin-top: 2rem;
+    background-color: var(--color-gesso);
+    color: var(--color-terra);
+    animation: pulse-cta 2.5s infinite; 
+}
+#solucoes .cta-button:hover {
+    background-color: var(--color-cimento);
+    color: var(--color-gesso);
+}
+#diferencial {
+    background-color: var(--color-gesso);
+    color: var(--color-piche);
+}
+#diferencial .container {
+    max-width: 900px; 
+    text-align: center;
+}
+#diferencial h2 {
+    font-size: 2.5rem;
+    color: var(--color-terra);
+    margin-bottom: 1rem;
+}
+#diferencial .intro-text {
+    font-size: 1.1rem;
+    color: var(--color-secundaria);
+    max-width: 700px;
+    margin: 0 auto 1.5rem auto;
+}
+#diferencial .intro-text em {
+    font-style: italic;
+    color: var(--color-terra);
+}
+#diferencial .intro-text strong {
+    font-weight: 500;
+    color: var(--color-terra);
+}
+#diferencial ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    text-align: left;
+    margin-top: 3rem;
+}
+#diferencial ul li {
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    transition: var(--transition-smooth);
+    
+    border: 1px solid rgba(0,0,0,0.05); 
+    animation: subtle-glow 4s ease-in-out infinite;
+}
+#diferencial ul li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+    
+    animation: none; 
+    border-color: transparent;
+}
+#diferencial ul li i {
+    font-size: 1.5rem;
+    color: var(--color-terra);
+    margin-right: 1rem;
+}
+#autoridade {
+    background-color: var(--color-cimento);
+    color: var(--color-gesso);
+}
+#autoridade h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+#autoridade p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    color: var(--color-gesso);
+}
+#autoridade p em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--color-piche); 
+}
+#cta-final {
+    background-color: var(--color-piche);
+    color: var(--color-gesso);
+    text-align: center;
+}
+#cta-final h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-gesso);
+}
+#cta-final p {
+    font-size: 1.1rem;
+    color: var(--color-cimento);
+    max-width: 600px;
+    margin: 0 auto 2.5rem auto;
+}
+#cta-final .cta-button {
+    background-color: var(--color-cimento);
+    color: var(--color-piche);
+    font-weight: 600;
+    animation: pulse-cta-cement 2.5s infinite; 
+}
+@keyframes pulse-cta-cement {
+    0% { box-shadow: 0 0 0 0 rgba(114, 103, 96, 0.5); }
+    70% { box-shadow: 0 0 0 15px rgba(114, 103, 96, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(114, 103, 96, 0); }
+}
+#cta-final .cta-button:hover {
+    background-color: var(--color-gesso);
+    color: var(--color-gesso);
+}
+footer {
+    padding: 3rem 0;
+    background-color: var(--color-secundaria);
+    color: var(--color-cimento);
+    text-align: center;
+}
+footer p {
+    font-size: 0.9rem;
+}
+footer a {
+    color: var(--color-gesso);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* ------------------------------------------
+RESPONSIVIDADE (Mobile)
+------------------------------------------
+*/
+@media (max-width: 900px) {
+    #sobre .container,
+    #solucoes .container {
+        grid-template-columns: 1fr;
+    }
+    
+    #diferencial ul {
+        grid-template-columns: 1fr;
+    }
+    
+    #solucoes .list-wrapper {
+        margin-top: 3rem;
+    }
+
+    header {
+        position: fixed; 
+        padding: 1rem 0; 
+        
+        background-color: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        box-shadow: none;
+        transition: background-color 0.4s cubic-bezier(0.23, 1, 0.32, 1), 
+                    padding 0.4s cubic-bezier(0.23, 1, 0.32, 1), 
+                    box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    
+    header .container {
+        justify-content: space-between; 
+    }
+    
+    header .logo .logo-img-default {
+        filter: none !important; 
+    }
+    
+    header .logo .logo-img {
+        height: 45px; 
+    }
+
+    .header-cta {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+    }
+    header.scrolled .header-cta {
+        padding: 0.6rem 1rem; 
+        font-size: 0.8rem; 
+    }
+    
+    #hero {
+        background-image: url('img/bgmobile.png'); 
+        background-position: center center; 
+        
+        align-items: center; 
+        
+        padding-top: 20rem; 
+        padding-bottom: 6rem; 
+    }
+
+    #hero .container {
+        text-align: center; 
+    }
+
+    #hero .hero-content {
+        max-width: 100%; 
+    }
+    
+    #hero h1 {
+        font-size: 2.2rem; 
+    }
+    
+    #hero p {
+        font-size: 1.1rem; 
+    }
+
+    /* AJUSTADO: Botão CTA do Hero para mobile */
+    #hero .cta-button {
+        padding: 1rem 1.5rem; 
+        font-size: 0.95rem; 
+        gap: 0.5rem; 
+        max-width: 90%; 
+        margin: 0 auto; 
+    }
+
+    /* AJUSTADO: Tamanho do ícone para mobile */
+    #hero .cta-button i {
+        font-size: 1.2rem; 
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 4rem 0;
+    }
+    
+    header .logo .logo-img {
+        height: 40px; 
+    }
+}
+
+@media (max-width: 480px) {
+    #hero {
+        padding-top: 22rem; 
+        padding-bottom: 4rem; 
+    }
+    
+    #hero h1 {
+        font-size: 2rem; 
+    }
+    
+    #hero p {
+        font-size: 1rem; 
+    }
+
+    .cta-button {
+        padding: 1rem 2rem;
+        font-size: 0.9rem;
+    }
+    
+    header .logo .logo-img {
+        height: 35px; 
+    }
+
+    header.scrolled .header-cta {
+        padding: 0.5rem 0.8rem; 
+        font-size: 0.75rem; 
+    }
+}
