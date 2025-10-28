@@ -63,27 +63,14 @@ img {
 
 section {
     padding: 7rem 0;
-    overflow: hidden;
+    overflow: hidden; /* Mantido para animações */
 }
 
 /* ------------------------------------------
 Animação de Brilho Sutil (Loop) - Para Seção Diferencial
 ------------------------------------------
 */
-@keyframes subtle-glow {
-    0% { 
-        box-shadow: 0 0 0 0px rgba(114, 103, 96, 0.1); 
-        border-color: rgba(0,0,0,0.05);
-    }
-    50% { 
-        box-shadow: 0 0 10px 3px rgba(114, 103, 96, 0.15); 
-        border-color: rgba(0,0,0,0.1);
-    }
-    100% { 
-        box-shadow: 0 0 0 0px rgba(114, 103, 96, 0.1);
-        border-color: rgba(0,0,0,0.05);
-    }
-}
+/* Animação removida conforme solicitado */
 
 
 /* ------------------------------------------
@@ -136,7 +123,7 @@ LOADER
 
 #loader.loading-animation .loader-bar {
     width: 100%; 
-    transition: width 2s ease-out; 
+    transition: width 1.5s ease-out; /* Duração 1.5s */
 }
 
 #loader.hidden {
@@ -148,7 +135,10 @@ LOADER
 HEADER (Menu) 
 ------------------------------------------
 */
-header {
+/* ==== CORREÇÃO APLICADA AQUI ==== */
+/* Os seletores 'header' foram trocados para '#main-header' para não afetar outros headers */
+
+#main-header {
     position: fixed;
     top: 0;
     left: 0;
@@ -158,28 +148,28 @@ header {
     transition: var(--transition-smooth); 
 }
 
-header .container {
+#main-header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-header .logo {
+#main-header .logo {
     display: block; 
     text-decoration: none;
     line-height: 0; 
 }
 
-header .logo .logo-img {
+#main-header .logo .logo-img {
     height: 50px; 
     width: auto;
 }
 
-header .logo .logo-img-default {
+#main-header .logo .logo-img-default {
     filter: brightness(0) invert(1); 
 }
 
-header.scrolled {
+#main-header.scrolled {
     background-color: rgba(226, 226, 226, 0.85); 
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -187,7 +177,7 @@ header.scrolled {
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-header.scrolled .logo .logo-img-default {
+#main-header.scrolled .logo .logo-img-default {
     filter: none !important; 
 }
 
@@ -216,7 +206,7 @@ header.scrolled .logo .logo-img-default {
     transform: translateY(0); 
 }
 
-header.scrolled .header-cta {
+#main-header.scrolled .header-cta {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -225,7 +215,7 @@ header.scrolled .header-cta {
     border-color: var(--color-piche); 
 }
 
-header.scrolled .header-cta:hover {
+#main-header.scrolled .header-cta:hover {
     background-color: var(--color-piche);
     border-color: var(--color-piche);
     color: var(--color-gesso); 
@@ -237,7 +227,10 @@ BOTÃO CTA (Principal da Página)
 ------------------------------------------
 */
 .cta-button {
-    display: inline-block; 
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
     font-family: var(--font-secondary);
     font-weight: 500;
     font-size: 1rem;
@@ -251,10 +244,15 @@ BOTÃO CTA (Principal da Página)
     cursor: pointer;
     box-shadow: 0 0 0 0 rgba(226, 226, 226, 0.4);
     
-    /* Prepara para o efeito de luz */
     position: relative;
     overflow: hidden;
     z-index: 1;
+    line-height: 1.4; 
+}
+
+.cta-button i {
+    font-size: 1.5rem; 
+    flex-shrink: 0; 
 }
 
 @keyframes pulse-cta { 
@@ -263,7 +261,6 @@ BOTÃO CTA (Principal da Página)
     100% { box-shadow: 0 0 0 0 rgba(226, 226, 226, 0); }
 }
 
-/* Hover padrão para outros botões */
 .cta-button:hover {
     transform: translateY(-3px);
     background-color: var(--color-cimento);
@@ -338,23 +335,10 @@ ANIMAÇÕES DE SCROLL (Fade In Up)
 }
 
 #hero .cta-button {
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    gap: 0.8rem; 
-    line-height: 1.4; 
-    
     background-color: var(--color-gesso); 
     color: var(--color-piche); 
 }
 
-#hero .cta-button i {
-    font-size: 1.5rem; 
-    flex-shrink: 0; 
-    z-index: 2; 
-}
-
-/* ANIMAÇÃO DE SHINE (BRILHO) */
 @keyframes shine {
     0% { transform: translateX(-100%); }
     60% { transform: translateX(100%); }
@@ -375,91 +359,157 @@ ANIMAÇÕES DE SCROLL (Fade In Up)
         rgba(255, 255, 255, 0) 100%
     );
     transform: translateX(-100%); 
-    transition: transform 0.6s ease, background 0.4s ease, opacity 0.4s ease; /* Adicionada transição */
+    transition: transform 0.6s ease, background 0.4s ease, opacity 0.4s ease; 
     animation: shine 4s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94); 
     animation-delay: 2s; 
     z-index: 0; 
 }
 
-/* Efeito HOVER do botão HERO */
 #hero .cta-button:hover {
     transform: translateY(-3px);
-    background-color: var(--color-cimento); /* Cor de fundo no hover */
-    color: var(--color-gesso); /* Cor do texto no hover */
-    /* NOVO: Adiciona o brilho externo sutil */
+    background-color: var(--color-cimento); 
+    color: var(--color-gesso); 
     box-shadow: 0 0 25px 8px rgba(255, 255, 255, 0.1); 
 }
 
-/* Efeito da LUZ INTERNA no HOVER */
 #hero .cta-button:hover::after {
-    animation: none; /* Para a animação contínua */
+    animation: none; 
     left: 0;
     width: 100%;
-    transform: none; /* Reseta a posição */
-    background: rgba(255, 255, 255, 0.15); /* Sobreposição de luz sutil */
-    opacity: 1; /* Garante visibilidade */
+    transform: none; 
+    background: rgba(255, 255, 255, 0.15); 
+    opacity: 1; 
 }
 
-#hero .cta-button span {
+#hero .cta-button span { 
     position: relative;
     z-index: 2;
 }
 
 /* ------------------------------------------
-2. SEÇÃO SOBRE ... (e demais seções) ...
+2. SEÇÃO SOBRE (Layout Desktop com Imagem à Direita)
 ------------------------------------------
 */
-/* ... (As seções 2 a 6 e o footer continuam iguais) ... */
 #sobre {
     background-color: var(--color-gesso);
     color: var(--color-piche);
+    position: relative; 
 }
+
 #sobre .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
+    display: block; 
 }
+
+#sobre .about-text {
+    max-width: 45%; 
+    padding-right: 2rem; 
+    position: relative; 
+    z-index: 1;
+}
+
 #sobre h2 {
-    font-size: 2.5rem;
+    font-size: clamp(2.4rem, 5vw, 3.9rem); /* ATUALIZAÇÃO: Diminuído de 4.0rem para 3.9rem */
+    line-height: 1.1; 
     color: var(--color-terra);
     margin-bottom: 1.5rem;
 }
+
 #sobre p {
     font-size: 1.1rem;
-    max-width: 500px;
+    max-width: none; 
     margin-bottom: 1.5rem;
     color: var(--color-secundaria);
 }
+
 #sobre p em {
     font-family: var(--font-primary);
     font-style: italic;
     font-size: 1.2rem;
     color: var(--color-terra);
 }
+
+.about-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 55%; 
+    z-index: 0; 
+    overflow: hidden; 
+    background-image: url('img/dobra2d.png');
+    background-size: cover; 
+    background-position: bottom center; 
+    background-repeat: no-repeat;
+}
+
+.about-image .img-mobile {
+    display: none; 
+}
+/* -------------------------------------------------------- */
+
+
+/* ------------------------------------------
+3. SEÇÃO SOLUCOES (Layout Desktop com Background)
+------------------------------------------
+*/
 #solucoes {
-    background-color: var(--color-terra);
     color: var(--color-gesso);
+    position: relative; /* Para z-index do container funcionar */
+    /* ATUALIZAÇÃO: Imagem de fundo para a seção inteira (Desktop) */
+    background-image: 
+        linear-gradient(to right, rgba(40, 32, 27, 0.95), rgba(40, 32, 27, 0.8) 70%, transparent), 
+        url('img/dobra3d.png'); 
+    background-color: var(--color-terra); 
+    background-size: cover;
+    background-position: bottom center;
+    background-repeat: no-repeat;
 }
 #solucoes .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: flex-start;
+    /* display: grid; FOI REMOVIDO */
+    /* grid-template-columns: 1fr 1fr; FOI REMOVIDO */
+    /* gap: 4rem; FOI REMOVIDO */
+    /* align-items: flex-start; FOI REMOVIDO */
+    position: relative; /* Conteúdo fica acima do fundo */
+    z-index: 1;
 }
-#solucoes h2 {
+
+/* Wrapper .solutions-content não precisa mais limitar largura */
+#solucoes .solutions-content {
+    /* NOVO: Transforma o wrapper em uma coluna flexível */
+    display: flex;
+    flex-direction: column;
+    
+    /* ATUALIZAÇÃO: Limita o conteúdo à metade esquerda no desktop */
+    max-width: 50%; 
+    padding-right: 2rem; /* ATUALIZAÇÃO: Garante respiro à direita */
+}
+
+/* A div .intro agora é a primeira coluna do grid */
+#solucoes .intro {
+    /* NOVO: Faz os filhos de intro (h2, p, button) se comportarem como itens flex/grid */
+    display: contents;
+}
+
+#solucoes h2 { 
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    color: var(--color-gesso); 
+    order: 1; /* NOVO: Ordem do texto */
 }
 #solucoes .intro-text {
     font-size: 1.1rem;
     color: var(--color-cimento);
-    max-width: 500px;
+    /* max-width: 500px;  REMOVIDO PARA PERMITIR LARGURA TOTAL NO STACK */
     margin-bottom: 2.5rem;
+    order: 2; /* NOVO: Ordem do texto */
+}
+/* A div .list-wrapper agora é a segunda coluna do grid */
+#solucoes .list-wrapper {
+     margin-top: 0; 
+     order: 3; /* NOVO: Ordem da lista */
 }
 #solucoes ul {
     list-style: none;
-    margin-top: 1rem;
 }
 #solucoes ul li {
     font-size: 1.15rem;
@@ -474,19 +524,40 @@ ANIMAÇÕES DE SCROLL (Fade In Up)
     color: var(--color-cimento);
     margin-right: 1rem;
 }
-#solucoes .cta-button {
+#solucoes .cta-button { 
     margin-top: 2rem;
     background-color: var(--color-gesso);
     color: var(--color-terra);
     animation: pulse-cta 2.5s infinite; 
 }
+
+/* NOVO: Regra de ordem específica para o botão desktop */
+#solucoes .cta-desktop-only {
+    order: 4; /* NOVO: Joga o botão para o final */
+    align-self: flex-start; /* ATUALIZAÇÃO: Garante que o botão não estique */
+}
+
+
 #solucoes .cta-button:hover {
     background-color: var(--color-cimento);
     color: var(--color-gesso);
 }
+
+/* ATUALIZAÇÃO: Esconder a div da imagem no Desktop */
+.solutions-image {
+   display: none; 
+}
+
+/* Botão mobile escondido no desktop */
+.cta-mobile-only {
+    display: none; 
+}
+
+/* --- Demais seções --- */
 #diferencial {
     background-color: var(--color-gesso);
     color: var(--color-piche);
+    padding-top: 2rem; /* ATUALIZAÇÃO: Reduzido de 5rem */
 }
 #diferencial .container {
     max-width: 900px; 
@@ -523,33 +594,63 @@ ANIMAÇÕES DE SCROLL (Fade In Up)
     font-size: 1.05rem;
     display: flex;
     align-items: center;
-    background-color: #fff;
+    background-color: transparent; /* ATUALIZAÇÃO: Fundo transparente */
     padding: 1.5rem;
     border-radius: 5px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    box-shadow: none; /* ATUALIZAÇÃO: Sem sombra */
     transition: var(--transition-smooth);
     
-    border: 1px solid rgba(0,0,0,0.05); 
-    animation: subtle-glow 4s ease-in-out infinite;
+    border: 1px solid #CFCFCF; /* ATUALIZAÇÃO: Contorno cinza mais escuro que o fundo */
+    animation: none; /* ATUALIZAÇÃO: Sem animação de brilho */
 }
 #diferencial ul li:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+    box-shadow: none; /* ATUALIZAÇÃO: Sem sombra no hover */
     
     animation: none; 
-    border-color: transparent;
+    border-color: var(--color-terra); /* ATUALIZAÇÃO: Contorno muda de cor no hover */
 }
 #diferencial ul li i {
+    /* Mantenho o estilo geral para o ícone */
     font-size: 1.5rem;
     color: var(--color-terra);
     margin-right: 1rem;
+    font-style: normal; /* ATUALIZAÇÃO: Garante que o ícone não fique em itálico */
 }
+
+/* **ATUALIZAÇÃO: Ícones trocados** */
+#diferencial ul li:nth-child(1) i::before { content: "\f058"; font-family: "Font Awesome 5 Free"; font-weight: 900; } /* f058 = fa-check-circle (Transparência/Excelência) */
+#diferencial ul li:nth-child(2) i::before { content: "\f807"; font-family: "Font Awesome 5 Free"; font-weight: 900; } /* f807 = fa-hard-hat (Supervisão técnica) */
+#diferencial ul li:nth-child(3) i::before { content: "\f5fd"; font-family: "Font Awesome 5 Free"; font-weight: 900; } /* f5fd = fa-layer-group (Materiais) */
+#diferencial ul li:nth-child(4) i::before { content: "\f66f"; font-family: "Font Awesome 5 Free"; font-weight: 900; } /* f66f = fa-landmark (Resultados que transcendem o tempo) */
+
+
 #autoridade {
-    background-color: var(--color-cimento);
+    /* background-color: var(--color-cimento); */ /* ATUALIZAÇÃO: Removido */
     color: var(--color-gesso);
+    
+    /* ATUALIZAÇÃO: Fundos Desktop */
+    position: relative;
+    background-image: 
+        
+        url('img/dobra5d.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: var(--color-terra); 
 }
+/* ATUALIZAÇÃO: Container da autoridade para centralizar */
+#autoridade .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
 #autoridade h2 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     margin-bottom: 1rem;
 }
 #autoridade p {
@@ -559,14 +660,41 @@ ANIMAÇÕES DE SCROLL (Fade In Up)
 }
 #autoridade p em {
     font-style: italic;
-    font-weight: 500;
-    color: var(--color-piche); 
+    font-weight: 600; /* ATUALIZAÇÃO: Destaque */
+    color: #fff; /* ATUALIZAÇÃO: De --color-piche para branco */
 }
+/* ------------------------------------------
+/* SEÇÃO CTA FINAL (Atualizada)
+/* ------------------------------------------ */
 #cta-final {
     background-color: var(--color-piche);
     color: var(--color-gesso);
+    text-align: left; /* Alinha texto à esquerda no desktop */
+    overflow: visible; /* ATUALIZAÇÃO: Permite a sobreposição da imagem */
+}
+
+#cta-final .container {
+    display: flex;
+    flex-direction: row; /* Lado a lado */
+    align-items: center;
+    gap: 3rem;
+}
+
+/* Coluna da Imagem (Desktop) */
+.cta-final-image {
+    flex: 0 0 350px; /* Base de 350px, sem encolher */
     text-align: center;
 }
+.cta-final-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Coluna do Conteúdo (Desktop) */
+.cta-final-content {
+    flex: 1; /* Ocupa o resto do espaço */
+}
+
 #cta-final h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
@@ -576,22 +704,115 @@ ANIMAÇÕES DE SCROLL (Fade In Up)
     font-size: 1.1rem;
     color: var(--color-cimento);
     max-width: 600px;
-    margin: 0 auto 2.5rem auto;
+    margin-bottom: 2.5rem;
 }
-#cta-final .cta-button {
+
+/* Botão CTA Final (com Efeito de Luz) */
+#cta-final .cta-button.cta-shine {
     background-color: var(--color-cimento);
-    color: var(--color-piche);
-    font-weight: 600;
-    animation: pulse-cta-cement 2.5s infinite; 
+    color: var(--color-gesso); /* Texto branco */
+    
+    /* ATUALIZAÇÃO: Fonte mais fina (400) no desktop também */
+    font-weight: 400; 
+    
+    position: relative; /* Necessário para o efeito */
+    overflow: hidden;  /* Necessário para o efeito */
+    z-index: 1;
 }
-@keyframes pulse-cta-cement {
-    0% { box-shadow: 0 0 0 0 rgba(114, 103, 96, 0.5); }
-    70% { box-shadow: 0 0 0 15px rgba(114, 103, 96, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(114, 103, 96, 0); }
+
+/* Ícone maior */
+#cta-final .cta-button.cta-shine i {
+    font-size: 1.7rem; /* ATUALIZAÇÃO: Ícone maior */
 }
-#cta-final .cta-button:hover {
-    background-color: var(--color-gesso);
-    color: var(--color-gesso);
+
+/* Efeito de Luz (Fecho de Luz) */
+/* O @keyframes 'shine' já existe do seu Hero, vamos reutilizá-lo */
+#cta-final .cta-button.cta-shine::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%; 
+    height: 100%;
+    
+    /* ATUALIZAÇÃO: Tom mais claro de 'cimento' (branco com opacidade) */
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%, /* Shine mais sutil */
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: translateX(-100%); 
+    animation: shine 4s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    animation-delay: 1.5s; 
+    z-index: -1; 
+}
+
+/* Hover: Mantém a cor do botão, apenas sobe */
+#cta-final .cta-button.cta-shine:hover {
+    background-color: var(--color-cimento); /* Mantém a cor */
+    color: var(--color-gesso); /* Mantém a cor */
+    transform: translateY(-3px); /* Mantém o 'lift' */
+    animation: none; /* Remove o pulso (caso houvesse) */
+}
+
+/* ------------------------------------------
+/* Responsividade do CTA FINAL (Atualizada)
+/* ------------------------------------------ */
+@media (max-width: 900px) {
+    #cta-final {
+        text-align: center; /* Centraliza tudo no mobile */
+    }
+    
+    #cta-final .container {
+        flex-direction: column; /* Empilha: Imagem em cima, Texto embaixo */
+    }
+
+    .cta-final-image {
+        flex-basis: auto; /* Reseta a base */
+        width: 100%;
+        
+        /* ATUALIZAÇÃO 1: Puxa a imagem AINDA MAIS para cima */
+        margin-top: -140px; /* Era -80px */
+        
+        /* ATUALIZAÇÃO 2: Remove o espaço entre a imagem e o texto */
+        margin-bottom: 0; /* Era 0.5rem */
+    }
+    
+    .cta-final-image img {
+        max-width: 300px; /* Limita o tamanho do selo no mobile */
+        margin: 0 auto;
+    }
+
+    .cta-final-content {
+        width: 100%;
+    }
+
+    #cta-final p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* ==== ATUALIZAÇÕES DO BOTÃO MOBILE ==== */
+    #cta-final .cta-button.cta-shine {
+        /* 1. Fonte mais fina (normal = 400) */
+        font-weight: 400; 
+        
+        /* 2. Ícone mais próximo do texto */
+        gap: 0.5rem; 
+        
+        /* 3. Centralização (já herdada de .cta-button) */
+        justify-content: center;
+        
+        /* Bônus: Garante que o ícone não fique muito grande no mobile */
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+    
+    #cta-final .cta-button.cta-shine i {
+        font-size: 1.5rem; /* Ajusta o ícone para o novo layout */
+    }
+    /* ===================================== */
 }
 footer {
     padding: 3rem 0;
@@ -613,23 +834,129 @@ RESPONSIVIDADE (Mobile)
 ------------------------------------------
 */
 @media (max-width: 900px) {
+    /* Layout Coluna Única para seções */
     #sobre .container,
     #solucoes .container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; 
+        display: block; 
     }
     
+    /* ATUALIZAÇÃO: Regra separada para #diferencial ul */
     #diferencial ul {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; 
+        /* display: block; <-- REMOVIDO (Este era o erro) */
+        gap: 1.5rem; /* <-- ADICIONADO (Espaçamento mobile) */
     }
-    
-    #solucoes .list-wrapper {
-        margin-top: 3rem;
+        
+    /* Ajuste Sobre Mobile */
+    #sobre {
+        padding-bottom: 0; 
+        overflow: hidden; 
+    }
+    #sobre .about-text {
+        max-width: 100%; 
+        padding-right: 0; 
+        z-index: auto; 
+        position: static; 
+    }
+    #sobre h2 {
+        font-size: clamp(2.1rem, 5vw, 4.2rem); 
+        line-height: 1.2; 
+    }
+    .about-image .img-mobile {
+        display: block; 
+    }
+    .about-image {
+        position: static; 
+        width: 100vw; 
+        max-width: none; 
+        height: auto; 
+        margin-left: calc(-50vw + 50%); 
+        margin-right: calc(-50vw + 50%);
+        margin-top: -3rem; 
+        z-index: auto; 
+        line-height: 0; 
+        font-size: 0; 
+        background-image: none; 
+    }
+    .about-image .img-mobile {
+        width: 100%; 
+        height: auto; 
+        object-fit: cover; 
+        border-radius: 0; 
+        box-shadow: none; 
+        vertical-align: bottom; 
     }
 
-    header {
+    /* --- Seção Soluções Mobile --- */
+    #solucoes {
+         padding-bottom: 0; 
+         background-image: none; /* Remove background */
+         background-color: var(--color-terra); /* Garante cor */
+    }
+    /* #solucoes .container já é display: block por regra geral acima */
+    #solucoes .solutions-content {
+        /* ATUALIZAÇÃO: Reseta o max-width e padding do desktop */
+        max-width: 100%;
+        padding-right: 0;
+    }
+     #solucoes .list-wrapper {
+        margin-top: 2rem; 
+    }
+    .cta-desktop-only {
+        display: none; 
+    }
+    .cta-mobile-only {
+        display: inline-flex; 
+        margin-top: 3rem; 
+        margin-left: auto; 
+        margin-right: auto; 
+        max-width: 90%; 
+        text-align: center; 
+        opacity: 1; 
+        visibility: visible;
+        transform: none;
+        order: 4; /* ATUALIZAÇÃO: Joga o botão para o final do container .solutions-content */
+    }
+     /* Imagem Soluções Mobile */
+     .solutions-image {
+        display: block; /* <<< Garante que a div apareça */
+        position: static; 
+        width: 100vw; 
+        max-width: none; 
+        height: auto; 
+        margin-left: calc(-50vw + 50%); 
+        margin-right: calc(-50vw + 50%);
+        margin-top: 0; /* <<< Resetado */
+        z-index: auto; 
+        line-height: 0; 
+        font-size: 0; 
+        background-image: none; 
+    }
+    .solutions-image .img-mobile {
+        display: block; 
+        width: 100%; 
+        height: auto; 
+        object-fit: cover; 
+        border-radius: 0; 
+        box-shadow: none; 
+        vertical-align: bottom; 
+    }
+    /* ------------------------------------------- */
+
+    /* ATUALIZAÇÃO: Fundo mobile para Seção Autoridade */
+    #autoridade {
+        background-image: 
+         
+    
+            url('img/dobra5.png');
+    }
+
+    /* Header Mobile */
+    /* ==== CORREÇÃO APLICADA AQUI ==== */
+    #main-header {
         position: fixed; 
         padding: 1rem 0; 
-        
         background-color: transparent;
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
@@ -638,65 +965,51 @@ RESPONSIVIDADE (Mobile)
                     padding 0.4s cubic-bezier(0.23, 1, 0.32, 1), 
                     box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
-    
-    header .container {
+    #main-header .container {
         justify-content: space-between; 
     }
-    
-    header .logo .logo-img-default {
+    #main-header .logo .logo-img-default {
         filter: none !important; 
     }
-    
-    header .logo .logo-img {
+    #main-header .logo .logo-img {
         height: 45px; 
     }
-
     .header-cta {
         opacity: 0;
         visibility: hidden;
         transform: translateY(-10px);
     }
-    header.scrolled .header-cta {
+    #main-header.scrolled .header-cta {
         padding: 0.6rem 1rem; 
         font-size: 0.8rem; 
     }
     
+    /* Hero Mobile */
     #hero {
         background-image: url('img/bgmobile.png'); 
         background-position: center center; 
-        
         align-items: center; 
-        
         padding-top: 20rem; 
         padding-bottom: 6rem; 
     }
-
     #hero .container {
         text-align: center; 
     }
-
     #hero .hero-content {
         max-width: 100%; 
     }
-    
     #hero h1 {
         font-size: 2.2rem; 
     }
-    
     #hero p {
         font-size: 1.1rem; 
     }
-
-    /* AJUSTADO: Botão CTA do Hero para mobile */
     #hero .cta-button {
         padding: 1rem 1.5rem; 
         font-size: 0.95rem; 
-        gap: 0.5rem; 
         max-width: 90%; 
         margin: 0 auto; 
     }
-
-    /* AJUSTADO: Tamanho do ícone para mobile */
     #hero .cta-button i {
         font-size: 1.2rem; 
     }
@@ -707,8 +1020,28 @@ RESPONSIVIDADE (Mobile)
         padding: 4rem 0;
     }
     
-    header .logo .logo-img {
+    /* ==== CORREÇÃO APLICADA AQUI ==== */
+    #main-header .logo .logo-img {
         height: 40px; 
+    }
+    #hero {
+        padding-top: 18rem;
+    }
+
+    #sobre h2,
+    #solucoes h2 { 
+        font-size: clamp(1.9rem, 5vw, 4.2rem); 
+    }
+
+    /* **Ajustes para seção diferencial no mobile** */
+    #diferencial {
+        padding-top: 2rem; /* ATUALIZAÇÃO: Reduzido de 4rem (regra geral da section) */
+    }
+    #diferencial h2 {
+        font-size: 2.2rem; /* Título menor para mobile */
+    }
+    #diferencial ul {
+        /* gap: 1.5rem;  <-- REMOVIDO (Agora herdado de 900px) */
     }
 }
 
@@ -726,17 +1059,348 @@ RESPONSIVIDADE (Mobile)
         font-size: 1rem; 
     }
 
-    .cta-button {
-        padding: 1rem 2rem;
+    .cta-button,
+    #hero .cta-button,
+    .cta-mobile-only { 
+        padding: 1rem 1.5rem; 
         font-size: 0.9rem;
     }
-    
-    header .logo .logo-img {
+    .cta-button i,
+    #hero .cta-button i,
+    .cta-mobile-only i { 
+         font-size: 1.2rem;
+    }
+
+    /* ==== CORREÇÃO APLICADA AQUI ==== */
+    #main-header .logo .logo-img {
         height: 35px; 
     }
 
-    header.scrolled .header-cta {
+    #main-header.scrolled .header-cta {
         padding: 0.5rem 0.8rem; 
         font-size: 0.75rem; 
     }
+    
+    #sobre h2,
+    #solucoes h2 {
+        /* * ==== CORREÇÃO IMPORTANTE ====
+         * O arquivo style.css original tinha um erro aqui.
+         * A regra acima estava aberta, sem uma chave de fechamento '}'.
+         * Isso fazia com que todo o CSS do portfólio antigo fosse 
+         * ignorado ou mal interpretado, quebrando o layout.
+         * A regra agora está fechada corretamente.
+         */
+    }
+
+    /* O CSS do portfólio antigo (id="portfolio") foi removido daqui */
+
+}
+
+/* ------------------------------------------
+/* SEÇÃO CLIENTES (Carrossel Novo - MODO CENTRAL)
+/* ------------------------------------------ */
+#clientes {
+    background-color: var(--color-gesso);
+    padding: 5rem 0 6rem 0;
+    color: var(--color-piche);
+}
+
+.clientes-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+.clientes-header .gh-title {
+    font-size: clamp(2rem, 3.6vw, 2.6rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-family: var(--font-primary);
+    color: var(--color-terra);
+}
+.clientes-header .gh-subtitle {
+    margin-top: 8px;
+    font-size: 1.1rem;
+    color: var(--color-secundaria);
+}
+
+/* Wrapper do Carrossel */
+.clientes-carousel-wrapper {
+    position: relative;
+}
+
+/* A 'janela' por onde vemos os slides */
+.clientes-viewport {
+    overflow: hidden; /* Isso cria o efeito "cortado" nas laterais */
+    position: relative;
+    /* A 'mask-image' foi removida para permitir o corte lateral */
+}
+
+/* O 'trilho' que segura e move os slides */
+.clientes-track {
+    display: flex;
+    /* ATUALIZADO: 'gap' (as margens entre as fotos) removido */
+    gap: 0; 
+    
+    /* A transição será controlada via JS */
+    transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Cada slide individual */
+.cliente-slide {
+    /* Largura definida pelo flex */
+    flex: 0 0 70%; 
+    
+    /* Largura máxima controlada */
+    max-width: 400px; 
+    /* min-width: 250px; */ /* <-- REMOVIDO (Este era o bug) */
+    
+    box-sizing: border-box;
+    
+    /* Proporção vertical */
+    aspect-ratio: 853 / 1280; 
+
+    /* Limpo, com cantos arredondados */
+    border-radius: 8px; 
+    overflow: hidden; 
+    box-shadow: none;
+}
+
+.cliente-slide img {
+    width: 100%;
+    
+    /* ATUALIZADO: A altura agora é 100% do contêiner vertical */
+    height: 100%; 
+    display: block;
+    
+    /* ATUALIZADO: 'cover' preenche o contêiner. 'contain' foi removido */
+    object-fit: cover; 
+    
+    /* REMOVIDO: Cor de fundo não é mais necessária */
+    /* background-color: var(--color-secundaria); */
+
+    transition: var(--transition-smooth);
+    opacity: 0.6;
+    transform: scale(0.95);
+}
+
+/* NOVO: Aplica a sombra e o arredondamento ao contêiner do slide */
+.cliente-slide {
+    border-radius: 8px; /* Cantos arredondados, mesma circunferência que os botões */
+    overflow: hidden; /* Garante que a imagem arredonde junto */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07); /* Sombra para o contêiner do slide */
+}
+
+/* ATUALIZADO: Slide ativo (central) - Destaque total */
+.cliente-slide.is-active {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12); /* Sombra mais forte para o slide ativo */
+}
+
+/* Slide ativo (central) - Destaque total */
+.cliente-slide.is-active img {
+    opacity: 1;
+    transform: scale(1); /* Tamanho normal */
+    box-shadow: none; /* ATUALIZADO: Sombra removida */
+}
+
+/* Slide ativo (central) - Destaque total */
+/* Responsividade do Carrossel */
+@media (max-width: 900px) {
+    
+    .clientes-nav {
+        /* Botões mais para as laterais (fora do container) */
+        width: 38px;
+        height: 38px;
+        font-size: 1.3rem;
+        left: -10px; 
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .clientes-nav.clientes-next {
+        left: auto;
+        right: -10px;
+    }
+
+    /* NOVO: Ajusta o slide para ser maior no mobile */
+    .cliente-slide {
+        flex-basis: 80%; /* Ocupa 80% da tela no mobile */
+    }
+}
+
+/* Navegação (Setas) */
+.clientes-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: var(--color-piche);
+    font-size: 1.5rem;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: var(--transition-smooth);
+}
+.clientes-nav:hover {
+    background-color: #fff;
+    transform: translateY(-50%) scale(1.05);
+}
+.clientes-prev { left: -15px; }
+.clientes-next { right: -15px; }
+
+
+/* Descrição Sincronizada */
+.clientes-descricao-wrapper {
+    margin-top: 2.5rem;
+    text-align: center;
+}
+#cliente-descricao-texto {
+    font-family: var(--font-primary);
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--color-secundaria);
+    min-height: 1.5em; /* Evita 'pulos' de layout na troca de texto */
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Responsividade do Carrossel */
+@media (max-width: 900px) {
+    
+    .clientes-nav {
+        /* ATUALIZADO: Botões mais para as laterais (fora do container) */
+        width: 38px;
+        height: 38px;
+        font-size: 1.3rem;
+        left: -10px; /* <-- Posição ajustada */
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .clientes-nav.clientes-next {
+         /* ATUALIZADO: Posição corrigida */
+        left: auto;
+        right: -10px; /* <-- Posição ajustada */
+    }
+}
+
+@media (max-width: 600px) {
+    /* Esta regra de layout foi REMOVIDA para manter o modo central */
+    /* .cliente-slide { flex-basis: 100%; } */
+
+    .clientes-header .gh-title {
+        font-size: 1.9rem;
+    }
+    .clientes-header .gh-subtitle {
+        font-size: 1.0rem;
+    }
+    #cliente-descricao-texto {
+        font-size: 1.1rem;
+    }
+}
+/* ------------------------------------------
+/* CTA INSTAGRAM (Dentro da Seção Clientes) - ATUALIZADO
+/* ------------------------------------------ */
+
+.clientes-instagram-cta {
+    display: flex;
+    flex-direction: row; /* Alinha os itens horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: space-between; /* Espaça os itens */
+    
+    border: 1px solid #D1D1D1; /* ATUALIZAÇÃO: Contorno mantido */
+    background-color: transparent; /* ATUALIZAÇÃO: Fundo transparente */
+    border-radius: 8px; /* Cantos arredondados (pouca circunferência) */
+    
+    padding: 1.25rem 1.5rem;
+    max-width: 750px; /* Limita a largura do bloco */
+    margin: 3.5rem auto 0 auto; /* Centraliza e dá espaço acima */
+    box-shadow: none; /* ATUALIZAÇÃO: Sombra removida */
+}
+
+.clientes-instagram-cta i {
+    font-size: 2.2rem;
+    color: var(--color-piche);
+    flex-shrink: 0; /* Impede que o ícone encolha */
+}
+
+.clientes-instagram-cta p {
+    flex: 1; /* Faz o texto ocupar o espaço disponível */
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    color: var(--color-secundaria);
+    font-size: 1rem;
+    line-height: 1.4;
+    margin: 0 1.5rem; /* Espaçamento entre o ícone e o botão */
+}
+
+.cta-button-instagram {
+    display: inline-block;
+    background-color: var(--color-terra);
+    color: var(--color-gesso);
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: var(--transition-smooth);
+    border: 1px solid var(--color-terra);
+    white-space: nowrap; /* Impede que o texto "acessar" quebre */
+}
+
+.cta-button-instagram:hover {
+    background-color: var(--color-cimento);
+    border-color: var(--color-cimento);
+    transform: translateY(-2px);
+}
+
+
+/* Responsividade para o CTA do Instagram */
+@media (max-width: 600px) {
+    .clientes-instagram-cta {
+        flex-direction: column; /* Empilha os itens verticalmente */
+        text-align: center;
+        gap: 1.25rem; /* Adiciona espaço entre os itens empilhados */
+        padding: 1.5rem 1.25rem;
+    }
+
+    .clientes-instagram-cta p {
+        margin: 0; /* Remove as margens laterais */
+    }
+
+    .cta-button-instagram {
+        width: 100%; /* Faz o botão ocupar a largura total */
+        text-align: center;
+    }
+}
+
+/* ------------------------------------------
+/* CORREÇÕES CARROSSEL
+/* ------------------------------------------ */
+
+/* Remove o padding do container do carrossel para os slides "vazarem" */
+#clientes .container-carousel {
+    width: 100%; /* Ocupa a tela inteira */
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Re-centraliza os textos que agora estão em um container full-width */
+#clientes .clientes-header,
+#clientes .clientes-descricao-wrapper,
+#clientes .clientes-instagram-cta {
+    /* Recria o espaçamento do .container original */
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    box-sizing: border-box;
+}
+
+/* Garante que o CTA do instagram não fique largo demais */
+#clientes .clientes-instagram-cta {
+    max-width: 750px;
 }
