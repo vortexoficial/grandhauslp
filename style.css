@@ -3005,3 +3005,194 @@ RESPONSIVIDADE (Mobile)
   }
 }
 
+/* ======== Ajuste visual da seção Brand ======== */
+#brand {
+  background: #000;
+  color: #fff;
+  padding: 2.2rem 0;
+}
+
+#brand .brand-caption {
+  font-size: clamp(0.95rem, 2.7vw, 1.125rem);
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+/* -------------------- MOBILE -------------------- */
+@media (max-width: 1023px) {
+  #brand .brand-container {
+    display: block;
+  }
+
+  #brand .brand-media {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  #brand .brand-media img {
+    display: block;
+    width: 86vw;
+    height: auto;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* Cortes diagonais */
+  #brand .brand-media::before,
+  #brand .brand-media::after {
+    content: "";
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    background: #000;
+    transform: rotate(45deg);
+    z-index: 2;
+  }
+
+  #brand .brand-media::before {
+    top: -14px;
+    right: -14px;
+  }
+  #brand .brand-media::after {
+    bottom: -14px;
+    left: -14px;
+  }
+
+  /* Texto abaixo — alinhado à direita e com fonte serifada */
+  #brand .brand-caption {
+    font-family: "Georgia", "Times New Roman", serif; /* similar ao print */
+    text-align: right !important;
+    width: 86vw;
+    margin: 0.9rem auto 0 auto;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    letter-spacing: 0.2px;
+  }
+}
+
+/* -------------------- DESKTOP -------------------- */
+@media (min-width: 1024px) {
+  #brand {
+    padding: 3.6rem 0;
+  }
+
+  #brand .brand-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+  }
+
+  #brand .brand-media {
+    flex: 0 0 40%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  #brand .brand-media img {
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  #brand .brand-media::before,
+  #brand .brand-media::after {
+    display: none;
+  }
+
+  #brand .brand-caption {
+    flex: 1;
+    text-align: left;
+    font-family: "Poppins", sans-serif; /* mantém padrão do site no desktop */
+    font-size: clamp(1.05rem, 1.3vw, 1.35rem);
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0;
+  }
+}
+
+/* ==== BRAND — correções finais ==== */
+
+/* MOBILE: texto alinhado pelos mesmos limites da imagem */
+@media (max-width: 1023px) {
+  /* zera o padding do container só nessa seção, senão o texto “descola” */
+  #brand .container,
+  #brand .brand-container { padding-left: 0 !important; padding-right: 0 !important; }
+
+  /* imagem centralizada (já está), mantendo o mesmo width */
+  #brand .brand-media { width: fit-content; margin: 0 auto; }
+  #brand .brand-media img { width: 86vw; height: auto; }
+
+  /* texto com a MESMA largura e centralizado pelo mesmo auto */
+  #brand .brand-caption {
+    width: 86vw;                 /* igual à imagem */
+    margin: 0.9rem auto 0 auto;  /* centraliza o bloco inteiro */
+    text-align: right;           /* como você pediu */
+    font-family: "Georgia","Times New Roman",serif;  /* mesma fonte do mobile */
+    line-height: 1.6;
+  }
+}
+
+/* DESKTOP: aumentar tamanho e usar a mesma fonte do mobile */
+@media (min-width: 1024px) {
+  /* mantém imagem à esquerda e texto à direita como já definido */
+  #brand .brand-caption {
+    font-family: "Georgia","Times New Roman",serif; /* mesma fonte */
+    font-size: clamp(1.25rem, 1.15vw, 1.6rem);      /* maior no desktop */
+    line-height: 1.55;
+  }
+}
+/* ===== Seta minimalista (mobile only) ===== */
+@media (max-width: 1023px) {
+  .arrow-down-min {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    margin: 0 auto 1.2rem auto;
+    animation: arrow-bounce 1.5s infinite ease-in-out;
+  }
+
+  .arrow-down-min::before,
+  .arrow-down-min::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+  }
+
+  /* haste */
+  .arrow-down-min::before {
+    width: 2px;
+    height: 12px;
+    top: 0;
+  }
+
+  /* ponta em V */
+  .arrow-down-min::after {
+    width: 8px;
+    height: 8px;
+    bottom: 0;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: translateX(-50%) rotate(-45deg);
+  }
+
+  @keyframes arrow-bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.85; }
+    50% { transform: translateY(5px); opacity: 1; }
+  }
+}
+/* ===== Espaço acima da imagem no mobile ===== */
+@media (max-width: 1023px) {
+  #brand .brand-media {
+    margin-top: 2.5rem; /* aumenta o espaço acima da imagem */
+  }
+}
+
