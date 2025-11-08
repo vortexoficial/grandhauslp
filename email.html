@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Grand Haus Engenharia</title>
+  <title>Contato - Grand Haus Engenharia</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,20 +17,8 @@
       background-color: #050301;
     }
 
-    .banners a img {
-      display: block;
-      margin-bottom: 10px;
-      width: 100%;
-      height: auto;
-    }
-
-    .desktop-banner { display: block; }
-    .mobile-banner { display: none; }
-
-    @media (max-width: 768px) {
-      .desktop-banner { display: none; }
-      .mobile-banner { display: block; }
-    }
+    /* Oculta banners da pág. principal que não usamos aqui */
+    .banners a img { display: none; }
 
     :root{
       --logo-size: 120px;
@@ -103,10 +91,81 @@
       pointer-events: none;
     }
   </style>
+
+  <style>
+    .form-container {
+      /* Usa o mesmo padding e max-width dos banners */
+      padding: 0 20px 40px;
+      max-width: 620px; /* (600px + 20px padding) */
+      margin: 40px auto 0;
+      color: #E2E2E2; /* Cor Gesso para texto sobre fundo escuro */
+      text-align: left;
+    }
+    
+    .form-container h2 {
+      font-family: 'IBM Plex Serif', serif;
+      font-weight: 500;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .form-container p {
+      font-size: 1rem;
+      margin-bottom: 30px;
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #E2E2E2;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      background-color: #1a1a1a;
+      border: 1px solid #303030;
+      border-radius: 8px;
+      color: #E2E2E2;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 14px;
+      background-color: #E2E2E2; /* Cor Gesso (Botão) */
+      color: #050301; /* Cor Piche (Texto Botão) */
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-submit:hover {
+      background-color: #c0c0c0;
+    }
+  </style>
+
 </head>
 
 <body class="loading">
-  <!-- LOADER -->
   <div id="loader" class="loader-wrap">
     <div class="loader-inner">
       <div class="loader-logo">
@@ -115,11 +174,10 @@
       <div class="loader-bar">
         <span class="loader-fill"></span>
       </div>
-      <p class="loader-text">Carregando...</p>
+      <p class="loader-text">Preparando formulário...</p>
     </div>
   </div>
 
-  <!-- TOPO -->
   <div class="hero">
     <div class="logo-container">
       <img src="img/logo.png" alt="Logo Grand Haus" class="logo" />
@@ -133,47 +191,37 @@
         </a>
       </div>
     </div>
-    <div class="arrow"><font size="3">Clique e acesse ↓</font></div>
-  </div>
+    </div>
 
-  <!-- BANNERS -->
-  <div class="banners">
-    <!-- Banner 1 -->
-    <a href="sobrenos.html" class="desktop-banner">
-      <img src="img/banner.png" alt="Banner 1" />
-    </a>
+  <div class="form-container">
+    <h2>Envie-nos<br>um e-mail</h2>
+    <p>Preencha os campos abaixo para entrar em contato com nossa equipe comercial.</p>
 
-    <!-- Banner 2 -->
-    <a href="https://wa.me/5513996587579?text=Ol%C3%A1%2C%20Gostaria%20de%20realizar%20um%20or%C3%A7amento!" class="desktop-banner" target="_blank">
-      <img src="img/banner2.png" alt="Banner 2" />
-    </a>
+    <form action="https://formspree.io/f/mzzypgny" method="POST">
+      
+      <div class="form-group">
+        <label for="name">Seu Nome:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Seu E-mail (para respondermos):</label>
+        <input type="email" id="email" name="email" required>
+      </div>
 
-    <!-- Banner 3 -->
-    <a href="email.html" class="desktop-banner">
-      <img src="img/banner3.png" alt="Banner 3" />
-    </a>
+      <div class="form-group">
+        <label for="subject">Assunto:</label>
+        <input type="text" id="subject" name="subject" required>
+      </div>
 
-    <!-- Banner 4 -->
-    <a href="https://wa.me/5513996587579?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20engenheiro!" class="desktop-banner" target="_blank">
-      <img src="img/banner4.png" alt="Banner 4" />
-    </a>
+      <div class="form-group">
+        <label for="message">Mensagem:</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+      </div>
+      
+      <button type="submit" class="form-submit">Enviar Mensagem</button>
 
-    <!-- MOBILE -->
-    <a href="sobrenos.html" class="mobile-banner">
-      <img src="img/banner1.png" alt="Banner 1 Mobile" />
-    </a>
-
-    <a href="https://wa.me/5513996587579?text=Ol%C3%A1%2C%20Gostaria%20de%20realizar%20um%20or%C3%A7amento!" class="mobile-banner" target="_blank">
-      <img src="img/banner22.png" alt="Banner 2 Mobile" />
-    </a>
-
-    <a href="email.html" class="mobile-banner">
-      <img src="img/banner33.png" alt="Banner 3 Mobile" />
-    </a>
-
-    <a href="https://wa.me/5513996587579?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20engenheiro!" class="mobile-banner" target="_blank">
-      <img src="img/banner44.png" alt="Banner 4 Mobile" />
-    </a>
+    </form>
   </div>
 
   <footer>
