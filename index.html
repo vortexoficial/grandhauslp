@@ -102,11 +102,121 @@
       transition: opacity .4s ease;
       pointer-events: none;
     }
+    
+    /* --- CSS DO NOVO SCROLLER HERO (COM CORREÇÕES) --- */
+
+    /* 1. Força o .hero a ser o container principal
+       *TROCA* de 100vh para 100svh (small viewport height) para corrigir
+       o posicionamento em navegadores mobile (Safari, Chrome, etc.) */
+    .hero {
+      position: relative !important;
+      overflow: hidden !important;
+      min-height: 100vh !important; /* Fallback para browsers antigos */
+      min-height: 100svh !important; /* Correção para mobile */
+      background: none !important; 
+      display: block !important;
+    }
+
+    /* 2. Força o logo e ícones para a base
+       *MUDANÇA*: Agora usa flexbox para organizar o conteúdo interno */
+    .hero .logo-container {
+      display: flex !important;           /* <-- MUDANÇA */
+      flex-direction: column !important; /* <-- MUDANÇA (empilha vertical) */
+      align-items: center !important;    /* <-- MUDANÇA (centraliza horizontal) */
+      
+      position: absolute !important;
+      bottom: 25px !important;       /* Aumentei um pouco a distância da base */
+      left: 50% !important;         
+      transform: translateX(-50%) !important; 
+      width: 100% !important;        
+      text-align: center !important; 
+      z-index: 2 !important;         
+      top: auto !important;
+      right: auto !important;
+    }
+    
+   /* 3. REGRA '.hero .arrow' REMOVIDA */
+   /* O texto agora está dentro do .logo-container */
+    
+    /* 4. O container do scroller (fundo) */
+    .hero-scroller {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0; 
+      background: #050301;
+    }
+    
+    /* 5. Overlay escuro (para contraste) */
+    .hero-scroller::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        /* Sugestão: adicione um leve overlay para melhorar a leitura */
+        /* background: rgba(0, 0, 0, 0.2); */
+    }
+
+    /* 6. O trilho das imagens */
+    .scroller-track {
+      display: flex;
+      width: max-content; 
+      height: 100%;
+      animation: scrollLeft 120s linear infinite !important;
+    }
+
+    /* 7. As imagens */
+    .scroller-track img {
+      height: 100%;       
+      width: auto;         
+      object-fit: cover;   
+      flex-shrink: 0;    
+      padding: 0;          
+      margin: 0;           
+    }
+
+    /* 8. A animação (Keyframes) */
+    @keyframes scrollLeft {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    
+    /* --- NOVAS REGRAS PARA ORGANIZAR O CONTEÚDO --- */
+    
+    /* 9. Adiciona espaço abaixo da logo */
+    .hero .logo-container .logo {
+      margin-bottom: 15px; /* Substitui o <br> */
+    }
+
+    /* 10. Adiciona espaço abaixo dos ícones sociais */
+    .hero .logo-container .social-icons {
+      margin-bottom: 15px; /* Substitui o <br> */
+      /* Garante que os ícones fiquem lado a lado */
+      display: flex;
+      gap: 15px; /* Espaço entre os ícones */
+    }
+    
+    /* 11. Estiliza o novo texto 'Clique e acesse' */
+    .hero .logo-container .click-prompt {
+      color: #FFFFFF !important;
+      font-family: 'Inter', sans-serif !important;
+      font-size: 14px !important;
+      font-weight: 300 !important;
+      margin: 0; /* Remove margem padrão do <p> */
+    }
+    
+    /* --- FIM DO CSS DO SCROLLER --- */
+    
   </style>
 </head>
 
 <body class="loading">
-  <!-- LOADER -->
   <div id="loader" class="loader-wrap">
     <div class="loader-inner">
       <div class="loader-logo">
@@ -119,11 +229,54 @@
     </div>
   </div>
 
-  <!-- TOPO -->
   <div class="hero">
+    
+    <div class="hero-scroller">
+      <div class="scroller-track">
+        
+        <img src="carrossel/1c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/2c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/3c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/4c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/5c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/6c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/7c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/8c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/9c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/10c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/11c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/12c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/13c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/14c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/15c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/16c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/17c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/18c.jpg" alt="Imagem Scroller">
+        
+        <img src="carrossel/1c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/2c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/3c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/4c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/5c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/6c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/7c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/8c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/9c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/10c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/11c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/12c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/13c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/14c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/15c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/16c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/17c.jpg" alt="Imagem Scroller">
+        <img src="carrossel/18c.jpg" alt="Imagem Scroller">
+      </div>
+    </div>
+  
     <div class="logo-container">
       <img src="img/logo.png" alt="Logo Grand Haus" class="logo" />
-      <br><br>
+      
       <div class="social-icons">
         <a href="https://www.instagram.com/grandhausengenharia" target="_blank">
           <img src="img/instagram.png" alt="Instagram" />
@@ -132,33 +285,29 @@
           <img src="img/whatsapp.png" alt="WhatsApp" />
         </a>
       </div>
+      
+      <p class="click-prompt">Clique e acesse ↓</p>
     </div>
-    <div class="arrow"><font size="3">Clique e acesse ↓</font></div>
-  </div>
-
-  <!-- BANNERS -->
+    
+    </div>
+  
   <div class="banners">
-    <!-- Banner 1 -->
     <a href="sobrenos.html" class="desktop-banner">
       <img src="img/banner.png" alt="Banner 1" />
     </a>
 
-    <!-- Banner 2 -->
     <a href="https://wa.me/5513996587579?text=Ol%C3%A1%2C%20Gostaria%20de%20realizar%20um%20or%C3%A7amento!" class="desktop-banner" target="_blank">
       <img src="img/banner2.png" alt="Banner 2" />
     </a>
 
-    <!-- Banner 3 -->
     <a href="email.html" class="desktop-banner">
       <img src="img/banner3.png" alt="Banner 3" />
     </a>
 
-    <!-- Banner 4 -->
     <a href="https://wa.me/5513996587579?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20engenheiro!" class="desktop-banner" target="_blank">
       <img src="img/banner4.png" alt="Banner 4" />
     </a>
 
-    <!-- MOBILE -->
     <a href="sobrenos.html" class="mobile-banner">
       <img src="img/banner1.png" alt="Banner 1 Mobile" />
     </a>
