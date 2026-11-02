@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', (event) => {
 
-    // --- 1. LÓGICA DO LOADER (2s) ---
+    // --- 1. LÓGICA DO LOADER (0,7s) ---
     const loader = document.getElementById('loader');
     const loaderBar = document.querySelector('.loader-bar'); 
 
@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     if(loader) {
                         loader.remove();
                     }
-                }, 700); // AJUSTADO: Fade-out do loader mais rápido (0.7s)
+                }, 500); // Fade-out do loader (0.5s)
 
-            }, 1800); // AJUSTADO: Tempo total da barra + buffer (1.8s)
+            }, 650); // Tempo da barra (0.6s) + respiro
 
-        }, 100); 
+        }, 50);
     }
     
 
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Adiciona a descrição no 'alt' da imagem para acessibilidade
             slidesHTML += `
                 <div class="cliente-slide" data-index="${i}">
-                    <img src="carrossel/${i + 1}.jpg" alt="${descricoes[i]}">
+                    <img src="carrossel/${i + 1}.webp" alt="${descricoes[i]}" loading="lazy" decoding="async" width="706" height="1059">
                 </div>
             `;
         }

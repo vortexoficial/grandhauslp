@@ -308,7 +308,7 @@ ANIMAÇÕES DE SCROLL (Fade In Up)
             rgba(25, 19, 14, 0.85) 40%, 
             rgba(25, 19, 14, 0.5) 70%,
             transparent 100%), 
-        url('img/bg.png'); 
+        url('img/bg.webp'); 
     
     background-size: cover; 
     background-position: right center; 
@@ -436,7 +436,7 @@ ANIMAÇÕES DE SCROLL (Fade In Up)
     width: 55%; 
     z-index: 0; 
     overflow: hidden; 
-    background-image: url('img/dobra2d.png');
+    background-image: url('img/dobra2d.webp');
     background-size: cover; 
     background-position: bottom center; 
     background-repeat: no-repeat;
@@ -458,7 +458,7 @@ ANIMAÇÕES DE SCROLL (Fade In Up)
     /* ATUALIZAÇÃO: Imagem de fundo para a seção inteira (Desktop) */
     background-image: 
         linear-gradient(to right, rgba(40, 32, 27, 0.95), rgba(40, 32, 27, 0.8) 70%, transparent), 
-        url('img/dobra3d.png'); 
+        url('img/dobra3d.webp'); 
     background-color: var(--color-terra); 
     background-size: cover;
     background-position: bottom center;
@@ -633,7 +633,7 @@ ANIMAÇÕES DE SCROLL (Fade In Up)
     position: relative;
     background-image: 
         
-        url('img/dobra5d.png');
+        url('img/dobra5d.webp');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -949,7 +949,7 @@ RESPONSIVIDADE (Mobile)
         background-image: 
          
     
-            url('img/dobra5.png');
+            url('img/dobra5.webp');
     }
 
     /* Header Mobile */
@@ -986,7 +986,7 @@ RESPONSIVIDADE (Mobile)
     
     /* Hero Mobile */
     #hero {
-        background-image: url('img/bgmobile.png'); 
+        background-image: url('img/bgmobile.webp'); 
         background-position: center center; 
         align-items: center; 
         padding-top: 20rem; 
@@ -1715,7 +1715,7 @@ ANIMAÇÕES DE SCROLL (Fade In Up)
             rgba(25, 19, 14, 0.85) 40%, 
             rgba(25, 19, 14, 0.5) 70%,
             transparent 100%), 
-        url('img/bg.png'); 
+        url('img/bg.webp'); 
     
     background-size: cover; 
     background-position: right center; 
@@ -1843,7 +1843,7 @@ ANIMAÇÕES DE SCROLL (Fade In Up)
     width: 32%; 
     z-index: 0; 
     overflow: hidden; 
-    background-image: url('img/dobra2d.png');
+    background-image: url('img/dobra2d.webp');
     background-size: contain; 
     background-position: center right; 
     background-repeat: no-repeat;
@@ -1865,7 +1865,7 @@ ANIMAÇÕES DE SCROLL (Fade In Up)
     /* ATUALIZAÇÃO: Imagem de fundo para a seção inteira (Desktop) */
     background-image: 
         linear-gradient(to right, rgba(40, 32, 27, 0.95), rgba(40, 32, 27, 0.8) 70%, transparent), 
-        url('img/dobra3d.png'); 
+        url('img/dobra3d.webp'); 
     background-color: var(--color-terra); 
     background-size: cover;
     background-position: bottom center;
@@ -2040,7 +2040,7 @@ ANIMAÇÕES DE SCROLL (Fade In Up)
     position: relative;
     background-image: 
         
-        url('img/dobra5d.png');
+        url('img/dobra5d.webp');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -2356,7 +2356,7 @@ RESPONSIVIDADE (Mobile)
         background-image: 
          
     
-            url('img/dobra5.png');
+            url('img/dobra5.webp');
     }
 
     /* Header Mobile */
@@ -2393,7 +2393,7 @@ RESPONSIVIDADE (Mobile)
     
     /* Hero Mobile */
     #hero {
-        background-image: url('img/bgmobile.png'); 
+        background-image: url('img/bgmobile.webp'); 
         background-position: center center; 
         align-items: center; 
         padding-top: 20rem; 
@@ -3196,3 +3196,104 @@ RESPONSIVIDADE (Mobile)
   }
 }
 
+
+/* ------------------------------------------
+AJUSTES 11/2026: ícones em SVG, botão do hero
+na primeira tela do celular e selo da Futura
+------------------------------------------
+*/
+
+/* Ícones Lucide em SVG (substituem Font Awesome e Phosphor) */
+.ic {
+    display: inline-flex;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    font-style: normal;
+    flex-shrink: 0;
+}
+.ic svg {
+    width: 100%;
+    height: 100%;
+    stroke-width: 1.75;
+}
+#solucoes ul li .ic svg { stroke-width: 2.25; }
+#diferencial ul li i::before { content: none !important; }
+
+/* Celular: hero do tamanho da tela, texto embaixo e botão sempre visível */
+@media (max-width: 900px) {
+    #hero {
+        min-height: 100vh;
+        min-height: 100svh;
+        align-items: flex-end;
+        padding-top: 6rem;
+        /* espaço da seta que faz parte da imagem de fundo */
+        padding-bottom: calc(9svh + 0.5rem);
+        background-image:
+            linear-gradient(to bottom, rgba(5, 3, 1, 0) 30%, rgba(5, 3, 1, 0.7) 48%, rgba(5, 3, 1, 0.92) 62%),
+            url('img/bgmobile.webp');
+    }
+    #hero h1 {
+        margin-bottom: 1rem;
+    }
+    #hero p {
+        margin-bottom: 1.75rem;
+    }
+}
+
+/* Celular de tela baixa (Instagram, iPhone SE, Android pequeno) */
+@media (max-width: 900px) and (max-height: 760px) {
+    #hero h1 {
+        font-size: 1.75rem;
+        margin-bottom: 0.75rem;
+    }
+    #hero p {
+        font-size: 0.92rem;
+        line-height: 1.55;
+        margin-bottom: 1.25rem;
+    }
+    #hero .cta-button {
+        padding: 0.85rem 1.4rem;
+    }
+}
+@media (max-width: 900px) and (max-height: 600px) {
+    #hero h1 {
+        font-size: 1.5rem;
+    }
+    #hero p {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+}
+
+/* Selo "Desenvolvido por" discreto */
+.footer__developer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    margin-top: 1rem;
+    font-size: 0.68rem !important;
+    letter-spacing: 0.02em;
+    color: var(--color-cimento);
+    opacity: 0.6;
+}
+.footer__developer-link {
+    display: inline-flex;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.footer__developer-link img {
+    width: 52px;
+    height: auto;
+    display: block;
+}
+.footer__developer-link:hover {
+    transform: scale(1.04);
+}
+.footer__developer:hover {
+    opacity: 1;
+}
+
+/* Carregamento curto (11/2026) */
+#loader { transition: opacity 0.5s ease, visibility 0.5s ease; }
+#loader.loading-animation .loader-bar { transition: width 0.6s ease-out; }

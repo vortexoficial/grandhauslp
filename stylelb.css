@@ -130,3 +130,9 @@ footer a {
   filter: brightness(1.2);
   transform: scale(1.05);
 }
+/* Selo Desenvolvido por, discreto (11/2026) */
+.footer__developer { display:flex; align-items:center; justify-content:center; gap:6px; margin:10px 0 0; font-size:10px; letter-spacing:.02em; opacity:.6; }
+.footer__developer-link { display:inline-flex; margin:0 !important; transition:transform .3s ease; }
+.footer__developer-link img { width:48px; height:auto; display:block; }
+.footer__developer-link:hover { transform:scale(1.04); }
+.footer__developer:hover { opacity:1; }
